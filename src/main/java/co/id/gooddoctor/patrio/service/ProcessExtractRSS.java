@@ -2,21 +2,18 @@ package co.id.gooddoctor.patrio.service;
 
 import co.id.gooddoctor.patrio.dao.ContentDao;
 import co.id.gooddoctor.patrio.entity.Content;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.syndication.feed.synd.SyndCategoryImpl;
-import com.sun.syndication.feed.synd.SyndContentImpl;
-import com.sun.syndication.feed.synd.SyndEntryImpl;
-import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.*;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
+import org.jdom.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 @Service
 public class ProcessExtractRSS {
@@ -62,6 +59,14 @@ public class ProcessExtractRSS {
         content.setPublishDate(entry.getPublishedDate());
         content.setTitle(entry.getTitle());
 
+        List<Element> foreignMarkup = (List<Element>) entry.getForeignMarkup();
+        foreignMarkup
+                .stream()
+                .forEach(img -> {
+                    String imgURL = img.getAttribute("url").getValue();
+                    content.setImgThumbnail(imgURL);
+                });
+
         entry.getCategories()
                 .stream()
                 .forEach(cat -> {
@@ -69,11 +74,11 @@ public class ProcessExtractRSS {
                     content.setCategory(catImpl.getName());
                 });
 
-
         entry.getContents()
                 .stream()
                 .forEach(c -> {
                     SyndContentImpl contentImpl = (SyndContentImpl) c;
+                    SyndContent o = (SyndContent) contentImpl.getInterface().cast(contentImpl);
                     content.setContents(contentImpl.getValue());
                 });
 

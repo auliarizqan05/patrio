@@ -22,6 +22,7 @@ public class Content {
     String contents;
     Date publishDate;
     String category;
+    String imgThumbnail;
 
     Date createdDate;
     Date lastDate;
