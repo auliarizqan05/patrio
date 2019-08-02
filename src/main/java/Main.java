@@ -17,7 +17,7 @@ public class Main {
     public static void main(String args[]){
 
         ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
-        context.getBean(ProcessExtractRSS.class).ExtractRSS();
+//        context.getBean(ProcessExtractRSS.class).extractRSS();
     }
 
 }

@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProcessExtractRSS {
@@ -24,31 +26,40 @@ public class ProcessExtractRSS {
     @Value("${link.rss}")
     private String linkRSS;
 
-    public String ExtractRSS() {
+    public List<Content> extractRSS() {
+        List<Content> listContent = new ArrayList<>();
         try {
             URL feedSource = new URL(linkRSS);
             SyndFeedInput input = new SyndFeedInput();
 
             SyndFeed feed = input.build(new XmlReader(feedSource));
 
-            feed.getEntries()
+            listContent = (List<Content>) feed.getEntries()
                     .stream()
-                    .forEach(entries -> {
+                    .map(entries -> {
                         SyndEntryImpl entry = (SyndEntryImpl) entries;
 
                         //mapping to object Content
                         Content content = mappingToContent(entry);
 
                         //save to db
-                        contentDao.save(content);
-                    });
+//                        contentDao.save(content);
+
+                        return content;
+                    }).collect(Collectors.toList());
         } catch (FeedException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "";
+        return listContent;
+    }
+
+    public List<Content> retrieveData(){
+        List<Content> listContent = contentDao.findAll();
+
+        return listContent;
     }
 
     private Content mappingToContent(SyndEntryImpl entry) {

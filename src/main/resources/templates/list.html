@@ -1,0 +1,85 @@
+<!--
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Guesehat Article</a>
+</nav>
+
+
+&lt;!&ndash;<main role="main" class="container ">&ndash;&gt;
+
+<div id="container">
+
+    <article th:each="contentList: ${contentList}">
+            <figure><img class="img-wrapper" th:src="${contentList.imgThumbnail}"/></figure>
+            <section id="main">
+                <p class="small-config" th:text="${contentList.author}"/></p>
+                <p class="small-config" th:text="${#dates.format(contentList.publishDate, 'dd-MM-yyyy HH:mm:ss')}" /></p>
+                <p class="small-config" th:text="${contentList.category}"/></p>
+                <a th:href="@{/listDetail}" ><h3 th:text="${contentList.title}"/></h3></a>
+                <p th:text="${contentList.desc1}"/></p>
+
+            </section>
+    </article>
+
+</div>
+
+&lt;!&ndash;<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>&ndash;&gt;
+</body>
+</html>
+-->
+
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="row mb-2" th:each="content, stat: ${contentList}" id="content">
+        <div class="col-2">
+            <img class="img-list" th:src="${content.imgThumbnail}"/>
+        </div>
+        <div class="col-6">
+            <div class="text-primary" th:text="${content.category}"></div>
+            <!--            <form th:action="@{/listDetail}" method="post">-->
+            <!--                <input type="hidden" th:field="${content.title}" />-->
+            <!--                <button class="customLink font-weight-bold" th:text="${content.title}"></button>-->
+            <!--            </form>-->
+            <a class="customLink" id="listDetail" th:text="${content.title} "/></a>
+        <div class="text-wrap" th:text="${content.desc1}"></div>
+    </div>
+</div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--<script type="application/javascript" th:href="@{webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>-->
+<!--<script type="application/javascript" th:href="@{/webjars/jquery/3.4.1/jquery.min.js}"/>-->
+<script type="application/javascript" th:src="@{/js/main.js}" ></script>
+
+</body>
+</html>

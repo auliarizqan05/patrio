@@ -1,0 +1,158 @@
+/*
+Colors:
+Dark teel: 10889E
+Light teel: E1F1F2
+Medium teel: 45bcd2
+Grey Teel: 445566
+*//*
+
+
+body {
+  font-family: cursive;
+   margin: 0;
+      padding: .3rem;
+      background-color: #eee;
+}
+
+
+#container {
+  width: 960px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  color: #445566;
+  font-family: Georgia, Times, Serif;
+  font-weight: normal;
+  margin: 0;
+  padding: 20px;
+}
+
+h2 {
+  color: #445566;
+  padding: 0px;
+}
+
+h3 {
+  color: #445566;
+  margin: 0px;
+}
+
+nav {
+  background-color: #45bcd2;
+  height: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding-top: 5px;
+}
+
+nav li {
+  display: inline;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+nav li a {
+  color: white;
+}
+
+aside {
+  width: 200px;
+  height: 350px;
+  border: 1px solid #10889E;
+  float: left;
+  margin-left: 30px;
+  padding: 5px;
+}
+
+figure {
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+section {
+            padding: 10px;
+            margin-bottom: 30px;
+}
+
+#main {
+  width: 650px;
+  float: right;
+  margin-right: 30px;
+  line-height: 20px;
+}
+
+footer {
+  height: 50px;
+  background-color: lightgrey;
+  clear: both;
+}
+
+footer ul {
+  list-style: none;
+  text-align: center;
+  padding-top: 15px;
+}
+
+footer li {
+  display: inline;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+footer li a {
+  color: black;
+}
+
+article {
+    display: grid;
+    grid-template-columns: 1fr 1000px 1fr;
+    background: right/contain content-box border-box no-repeat white;
+}
+
+.small-config{
+  font-size: 12;
+  color: green;
+  font-family: Georgia, Times, Serif;
+  margin: 8px;
+  line-height: 20%;
+}
+*/
+
+.img-list {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.customLink, .customLink:hover{
+  color: black;
+  text-decoration: none;
+}
+
+.oval {
+  height: 50px;
+  width: 100px;
+  background-color: #555;
+  border-radius: 50%;
+}
+
+button {
+    border: 0;
+    padding: 0;
+    font-size: 20;
+    display: inline;
+    background: none;
+    text-decoration: underline;
+    color: blue;
+}
+button:hover {
+    cursor: pointer;
+}
