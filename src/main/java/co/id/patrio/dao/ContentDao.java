@@ -1,6 +1,6 @@
-package co.id.gooddoctor.patrio.dao;
+package co.id.patrio.dao;
 
-import co.id.gooddoctor.patrio.entity.Content;
+import co.id.patrio.entity.Content;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

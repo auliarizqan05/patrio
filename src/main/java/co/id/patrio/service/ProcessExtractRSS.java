@@ -1,7 +1,7 @@
-package co.id.gooddoctor.patrio.service;
+package co.id.patrio.service;
 
-import co.id.gooddoctor.patrio.dao.ContentDao;
-import co.id.gooddoctor.patrio.entity.Content;
+import co.id.patrio.dao.ContentDao;
+import co.id.patrio.entity.Content;
 import com.sun.syndication.feed.synd.*;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
@@ -34,16 +34,15 @@ public class ProcessExtractRSS {
 
             SyndFeed feed = input.build(new XmlReader(feedSource));
 
-            listContent = (List<Content>) feed.getEntries()
-                    .stream()
-                    .map(entries -> {
-                        SyndEntryImpl entry = (SyndEntryImpl) entries;
+            List<SyndEntryImpl> entries = feed.getEntries();
+            listContent = entries.stream()
+                    .map(entry -> {
 
-                        //mapping to object Content
+                        // mapping to object Content
                         Content content = mappingToContent(entry);
 
-                        //save to db
-//                        contentDao.save(content);
+                        // save to db
+                        // contentDao.save(content);
 
                         return content;
                     }).collect(Collectors.toList());
@@ -56,7 +55,7 @@ public class ProcessExtractRSS {
         return listContent;
     }
 
-    public List<Content> retrieveData(){
+    public List<Content> retrieveData() {
         List<Content> listContent = contentDao.findAll();
 
         return listContent;
@@ -78,20 +77,11 @@ public class ProcessExtractRSS {
                     content.setImgThumbnail(imgURL);
                 });
 
-        entry.getCategories()
-                .stream()
-                .forEach(cat -> {
-                    SyndCategoryImpl catImpl = (SyndCategoryImpl) cat;
-                    content.setCategory(catImpl.getName());
-                });
+        List<SyndCategoryImpl> categories = entry.getCategories();
+        categories.forEach(cat -> content.setCategory(cat.getName()));
 
-        entry.getContents()
-                .stream()
-                .forEach(c -> {
-                    SyndContentImpl contentImpl = (SyndContentImpl) c;
-                    SyndContent o = (SyndContent) contentImpl.getInterface().cast(contentImpl);
-                    content.setContents(contentImpl.getValue());
-                });
+        List<SyndContentImpl> contents = entry.getContents();
+        contents.forEach(c -> content.setContents(c.getValue()));
 
         return content;
     }

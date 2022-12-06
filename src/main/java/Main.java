@@ -1,4 +1,3 @@
-import co.id.gooddoctor.patrio.service.ProcessExtractRSS;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "co.id.gooddoctor.patrio")
-@EnableJpaRepositories(basePackages = "co.id.gooddoctor.patrio.dao")
-@EntityScan(basePackages = "co.id.gooddoctor.patrio.entity")
+@ComponentScan(basePackages = "co.id.patrio")
+@EnableJpaRepositories(basePackages = "co.id.patrio.dao")
+@EntityScan(basePackages = "co.id.patrio.entity")
 @EnableAutoConfiguration
 public class Main {
 

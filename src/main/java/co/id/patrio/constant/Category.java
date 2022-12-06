@@ -1,4 +1,4 @@
-package co.id.gooddoctor.patrio.constant;
+package co.id.patrio.constant;
 
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package co.id.gooddoctor.patrio.entity;
+package co.id.patrio.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.Type;

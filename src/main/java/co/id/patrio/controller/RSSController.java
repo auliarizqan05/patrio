@@ -1,7 +1,7 @@
-package co.id.gooddoctor.patrio.controller;
+package co.id.patrio.controller;
 
-import co.id.gooddoctor.patrio.entity.Content;
-import co.id.gooddoctor.patrio.service.ProcessExtractRSS;
+import co.id.patrio.entity.Content;
+import co.id.patrio.service.ProcessExtractRSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

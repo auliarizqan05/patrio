@@ -4,21 +4,25 @@ import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 import org.jdom.Element;
+import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-public class Test {
+public class RssFeedTest {
 
-    @org.junit.Test
+    @Test
     public void extractFeedFile() {
         try {
             URL feedSource = new URL("https://www.guesehat.com/feed");
             SyndFeedInput input = new SyndFeedInput();
 
             SyndFeed feed = input.build(new XmlReader(feedSource));
-            System.out.println("Entries from RSS = " + feed.getEntries());
+
+            assertNotNull("Entries from RSS = " + feed.getEntries(), feed);
 
         } catch (FeedException e) {
             e.printStackTrace();
@@ -27,7 +31,7 @@ public class Test {
         }
     }
 
-    @org.junit.Test
+    @Test
     public void extractElementFile() {
         try {
             URL feedSource = new URL("https://www.guesehat.com/feed");
@@ -35,14 +39,12 @@ public class Test {
 
             SyndFeed feed = input.build(new XmlReader(feedSource));
 
-            feed.getEntries()
-                    .stream()
-                    .forEach(entries -> {
-                        SyndEntryImpl entry = (SyndEntryImpl) entries;
-
+            List<SyndEntryImpl> entries = feed.getEntries();
+            entries.forEach(entry -> {
                         List<Element> po = (List<Element>) entry.getForeignMarkup();
                         po.stream().forEach(p -> {
                             String imgURL = p.getAttribute("url").getValue();
+
                             System.out.println("URL for images = " + imgURL);
                         });
 
